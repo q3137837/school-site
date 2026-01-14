@@ -2,10 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
-/* 直接定义颜色，不依赖 config 文件 */
+/* 这里定义基础颜色，让页面不再是惨白的 */
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --border: 214.3 31.8% 91.4%; /* 加上这个，防止 border 报错 */
 }
 
 @media (prefers-color-scheme: dark) {
@@ -15,8 +16,6 @@
   }
 }
 
-/* ❌ 之前报错就是因为用了 @apply bg-background */
-/* ✅ 现在我们用标准写法，绝对稳！ */
 body {
   color: var(--foreground);
   background: var(--background);
