@@ -1,15 +1,35 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-  content: [
-    // 👇 绝对重点：这里必须是 ./app，这样布局才会生效！
-    "./app/**/*.{js,ts,jsx,tsx,mdx}",
-  ],
+  content: ["./app/**/*.{js,ts,jsx,tsx,mdx}"],
   theme: {
     extend: {
+      fontFamily: {
+        sans: [
+          "var(--font-geist-sans)",
+          "ui-sans-serif",
+          "system-ui",
+          "sans-serif",
+        ],
+        mono: [
+          "var(--font-geist-mono)",
+          "ui-monospace",
+          "SFMono-Regular",
+          "Menlo",
+          "Monaco",
+          "Consolas",
+          "Liberation Mono",
+          "monospace",
+        ],
+      },
+      borderRadius: {
+        card: "var(--radius)",
+      },
+      boxShadow: {
+        soft: "0 10px 30px -12px rgb(2 6 23 / 0.25)",
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
-        // 👇 我保留了这些变量定义，这样你的卡片颜色就能正常显示
         card: "var(--card)",
         "card-foreground": "var(--card-foreground)",
         primary: "var(--primary)",

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "编程班学生作品展示",
+  title: "小新老师和同学们的创意基地",
   description: "展示学生的网页游戏和软件作品",
 };
 
@@ -111,46 +112,61 @@ const works: Work[] = [
 ];
 
 export default function Home() {
+  const games = works.filter((work) => work.type === "game");
+  const software = works.filter((work) => work.type === "software");
+
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 dark:from-slate-900 dark:to-slate-800">
+    <div className="min-h-dvh flex flex-col">
       {/* 头部 */}
-      <header className="sticky top-0 z-50 backdrop-blur-sm bg-white/70 dark:bg-slate-900/70 border-b border-slate-200 dark:border-slate-700">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <h1 className="text-xl font-bold text-slate-900 dark:text-white">
-              编程班学生作品展示
+      <header className="sticky top-0 z-50 border-b border-slate-200/70 bg-white/75 backdrop-blur supports-[backdrop-filter]:bg-white/60 dark:border-slate-800/70 dark:bg-slate-950/70">
+        <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center gap-3">
+            <div className="h-9 w-9 rounded-xl bg-gradient-to-br from-blue-600 to-purple-600 shadow-soft" />
+            <h1 className="text-base font-semibold tracking-tight text-slate-900 dark:text-white sm:text-lg">
+              小新老师和同学们的创意基地
             </h1>
-            <nav className="hidden sm:flex gap-6">
-              <a href="#games" className="text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-colors">
-                网页游戏
-              </a>
-              <a href="#software" className="text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white transition-colors">
-                软件作品
-              </a>
-            </nav>
           </div>
+          <nav className="hidden items-center gap-2 sm:flex">
+            <a
+              href="#games"
+              className="rounded-full px-3 py-1.5 text-sm font-medium text-slate-700 transition hover:bg-slate-900/5 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-white/10 dark:hover:text-white"
+            >
+              网页游戏
+            </a>
+            <a
+              href="#software"
+              className="rounded-full px-3 py-1.5 text-sm font-medium text-slate-700 transition hover:bg-slate-900/5 hover:text-slate-900 dark:text-slate-200 dark:hover:bg-white/10 dark:hover:text-white"
+            >
+              软件作品
+            </a>
+          </nav>
         </div>
       </header>
 
       {/* 主体内容 */}
-      <main>
+      <main className="flex-1">
         {/* 背景图片区域 - 作者合照占位 */}
-        <section className="relative w-full h-64 sm:h-80 lg:h-96 overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-600 to-purple-600">
-            {/* 在这里替换成作者合照的链接 */}
-            <img
+        <section className="relative overflow-hidden">
+          <div className="absolute inset-0">
+            <Image
               src="/zhaopian.png"
               alt="作者合照"
-              className="w-full h-full object-cover opacity-80"
+              fill
+              priority
+              sizes="100vw"
+              className="object-cover object-[center_18%]"
             />
-            <div className="absolute inset-0 bg-black/30"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-slate-950/75 via-slate-950/20 to-transparent" />
           </div>
-          <div className="relative h-full flex items-start justify-center pt-8 sm:pt-12 px-4">
-            <div className="text-center">
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-4">
+          <div className="relative mx-auto flex min-h-[360px] max-w-7xl items-start px-4 py-10 sm:min-h-[440px] sm:px-6 sm:py-14 lg:min-h-[540px] lg:px-8">
+            <div className="mx-auto w-full max-w-2xl text-center">
+              <div className="inline-flex items-center rounded-full border border-white/25 bg-white/10 px-4 py-1 text-xs font-medium text-white shadow-soft">
+                2026 · 作品展
+              </div>
+              <h2 className="mt-5 text-3xl font-bold tracking-tight text-white drop-shadow-[0_6px_20px_rgba(0,0,0,0.55)] sm:text-4xl lg:text-5xl">
                 新河编程班
               </h2>
-              <p className="text-base sm:text-lg text-white/90 max-w-2xl mx-auto">
+              <p className="mt-4 text-balance text-base text-white/90 drop-shadow-[0_4px_14px_rgba(0,0,0,0.6)] sm:text-lg">
                 这里汇集了学生们精心制作的网页游戏和软件作品，每一件作品都凝聚着创意与努力
               </p>
             </div>
@@ -158,35 +174,49 @@ export default function Home() {
         </section>
 
         {/* 作品列表区域 */}
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 sm:py-12 lg:px-8">
 
         {/* 网页游戏区域 */}
-        <section id="games" className="mb-12 sm:mb-16">
-          <div className="flex items-center gap-3 mb-6 sm:mb-8">
-            <div className="w-1 h-6 sm:h-8 bg-blue-500 rounded-full"></div>
-            <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
-              网页游戏
-            </h3>
+        <section id="games" className="scroll-mt-24 mb-12 sm:mb-16">
+          <div className="mb-6 flex items-end justify-between gap-4 sm:mb-8">
+            <div className="flex items-center gap-3">
+              <div className="h-7 w-1 rounded-full bg-blue-500 sm:h-9" />
+              <div>
+                <h3 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-3xl">
+                  网页游戏
+                </h3>
+                <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
+                  共 {games.length} 个作品
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {works.filter((work) => work.type === "game").map((work) => (
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+            {games.map((work) => (
               <WorkCard key={work.id} work={work} />
             ))}
           </div>
         </section>
 
         {/* 软件作品区域 */}
-        <section id="software" className="mb-12 sm:mb-16">
-          <div className="flex items-center gap-3 mb-6 sm:mb-8">
-            <div className="w-1 h-6 sm:h-8 bg-green-500 rounded-full"></div>
-            <h3 className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
-              软件作品
-            </h3>
+        <section id="software" className="scroll-mt-24 mb-12 sm:mb-16">
+          <div className="mb-6 flex items-end justify-between gap-4 sm:mb-8">
+            <div className="flex items-center gap-3">
+              <div className="h-7 w-1 rounded-full bg-green-500 sm:h-9" />
+              <div>
+                <h3 className="text-2xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-3xl">
+                  软件作品
+                </h3>
+                <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
+                  共 {software.length} 个作品
+                </p>
+              </div>
+            </div>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
-            {works.filter((work) => work.type === "software").map((work) => (
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-6 lg:grid-cols-3">
+            {software.map((work) => (
               <WorkCard key={work.id} work={work} />
             ))}
           </div>
@@ -195,9 +225,9 @@ export default function Home() {
       </main>
 
       {/* 页脚 */}
-      <footer className="border-t border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-900">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-8">
-          <p className="text-center text-sm text-slate-600 dark:text-slate-400">
+      <footer className="border-t border-slate-200/70 bg-white/70 backdrop-blur dark:border-slate-800/70 dark:bg-slate-950/60">
+        <div className="mx-auto max-w-7xl px-4 py-8 text-center sm:px-6 lg:px-8">
+          <p className="text-sm text-slate-600 dark:text-slate-300">
             © 2026 学生作品展示平台 | 用代码创造未来
           </p>
         </div>
@@ -209,22 +239,28 @@ export default function Home() {
 // 作品卡片组件
 function WorkCard({ work }: { work: Work }) {
   return (
-    <div className="bg-white dark:bg-slate-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 border border-slate-200 dark:border-slate-700 flex flex-col h-full">
+    <div className="group flex h-full flex-col overflow-hidden rounded-card bg-white/80 shadow-soft ring-1 ring-slate-200/70 transition duration-300 hover:-translate-y-0.5 hover:shadow-xl dark:bg-slate-900/60 dark:ring-slate-800/70">
       {work.image && (
-        <div className="aspect-video w-full overflow-hidden bg-slate-100 dark:bg-slate-700">
-          <img
+        <div className="relative aspect-video w-full overflow-hidden bg-slate-100 dark:bg-slate-800">
+          <Image
             src={work.image}
             alt={work.title}
-            className="w-full h-full object-cover hover:scale-105 transition-transform duration-300"
+            fill
+            sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+            className="object-cover transition-transform duration-500 group-hover:scale-105"
+          />
+          <div
+            aria-hidden="true"
+            className="absolute inset-0 bg-gradient-to-t from-black/35 via-black/10 to-transparent"
           />
         </div>
       )}
-      <div className="p-4 sm:p-6 flex-1 flex flex-col">
-        <div className="flex items-start justify-between gap-2 mb-2">
-          <h4 className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white line-clamp-1">
+      <div className="flex flex-1 flex-col p-5 sm:p-6">
+        <div className="mb-2 flex items-start justify-between gap-2">
+          <h4 className="line-clamp-1 text-lg font-semibold tracking-tight text-slate-900 dark:text-white sm:text-xl">
             {work.title}
           </h4>
-          <span className={`px-2 py-1 text-xs font-medium rounded-full shrink-0 ${
+          <span className={`shrink-0 rounded-full px-2 py-1 text-xs font-medium ${
             work.type === "game"
               ? "bg-blue-100 text-blue-800 dark:bg-blue-900 dark:text-blue-200"
               : "bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200"
@@ -232,10 +268,10 @@ function WorkCard({ work }: { work: Work }) {
             {work.type === "game" ? "游戏" : "软件"}
           </span>
         </div>
-        <p className="text-sm text-slate-600 dark:text-slate-400 mb-4">
+        <p className="mb-4 text-sm text-slate-600 dark:text-slate-300">
           作者：{work.author}
         </p>
-        <p className="text-sm sm:text-base text-slate-700 dark:text-slate-300 line-clamp-3 mb-4 flex-1">
+        <p className="line-clamp-3 mb-4 flex-1 text-sm text-slate-700 dark:text-slate-200 sm:text-base">
           {work.description}
         </p>
         {work.demoUrl && (
@@ -243,9 +279,9 @@ function WorkCard({ work }: { work: Work }) {
             href={work.demoUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center w-full px-4 py-2 text-sm font-medium text-white bg-blue-600 rounded-lg hover:bg-blue-700 transition-colors"
+            className="mt-2 inline-flex items-center justify-center gap-2 rounded-lg bg-slate-900 px-4 py-2 text-sm font-semibold text-white transition hover:bg-slate-800 dark:bg-white dark:text-slate-900 dark:hover:bg-white/90"
           >
-            在线演示
+            在线演示 <span aria-hidden="true">↗</span>
           </a>
         )}
       </div>
