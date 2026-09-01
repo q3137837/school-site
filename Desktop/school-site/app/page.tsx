@@ -108,7 +108,16 @@ const works: Work[] = [
     description: "黄仁泽说真好玩",
     image: "/wk.png",
     demoUrl: "https://mj4rmm8wg3.coze.site/",        
-},
+  },
+  {
+    id: 11,
+    title: "星语号",
+    type: "game",
+    author: "小新老师",
+    description: "AI Agent 编程课堂：抽蛋唤醒星灵伙伴，用积木搭建会说话的 AI 智能体。",
+    image: "/xingyuhao.jpg",
+    demoUrl: "https://8e19d09b49ec4a1f8abe089fbf974b0d.app.workbuddy.link",
+  },
 ];
 
 export default function Home() {
